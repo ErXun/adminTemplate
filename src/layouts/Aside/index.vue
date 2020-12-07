@@ -69,7 +69,6 @@ export default {
     },
   },
   clickPage(item) {
-    console.log('---');
     this.$router.push({ path: item.path, query: this.$route.query });
   },
 };
