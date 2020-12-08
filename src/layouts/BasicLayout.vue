@@ -15,6 +15,7 @@
       <a-layout>
         <a-layout-header class="header clearfix">
           <a-icon
+            v-auth="['admin']"
             class="trigger"
             :type="collapsed ? 'menu-unfold' : 'menu-fold'"
             @click="() => (collapsed = !collapsed)"
@@ -28,7 +29,9 @@
           <footer-plus />
         </a-layout-footer>
       </a-layout>
-      <drawer-plus class="drawer" />
+      <authorized :authority="['admin']">
+        <drawer-plus class="drawer" />
+      </authorized>
     </a-layout>
   </div>
 </template>
