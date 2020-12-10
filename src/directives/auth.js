@@ -1,5 +1,5 @@
 import { check } from "../utils/auth";
-// 权限指令
+// 自定义权限指令
 function install(Vue, options = {}) {
   Vue.directive(options.name || 'auth', {
     inserted(el, binding) {

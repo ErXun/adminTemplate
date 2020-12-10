@@ -7,7 +7,7 @@ import './styles/common.less'
 import Antd from 'ant-design-vue';
 import Authorized from './components/Authorized.vue'
 import auth from './directives/auth.js';
-// Authorized
+
 
 
 Vue.config.productionTip = false
@@ -16,6 +16,7 @@ Vue.config.productionTip = false
 Vue.use(Antd)
 Vue.component('Authorized', Authorized)
 Vue.use(auth)
+
 
 
 new Vue({
