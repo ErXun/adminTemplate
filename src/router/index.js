@@ -7,6 +7,11 @@ import 'nprogress/nprogress.css'
 
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+
+}
 const routes = [
   {
     path: '/',
@@ -46,7 +51,7 @@ const routes = [
           {
             path: '/form/basicForm',
             name: 'basicForm',
-            meta: { title: '基础表单' },
+            meta: { title: '查询 Component' },
             component: () => import("@/views/form/BasicForm.vue")
           },
           {
