@@ -20,7 +20,7 @@ const routes = [
     children: [
       {
         path: '/',
-        redirect: "/dashboard/analysis"
+        redirect: "/dashboard/analysis",
       },
       {
         path: '/dashboard',
@@ -33,6 +33,12 @@ const routes = [
             name: 'analysis',
             meta: { title: '分析页' },
             component: () => import('@/views/dashboard/Analysis.vue'),
+            //  路由独享守卫
+            beforeEnter: (to, from, next) => {
+              console.log(to);
+              console.log(from);
+              next()
+            }
           },
           {
             path: '/dashboard/workplace',
@@ -55,7 +61,7 @@ const routes = [
             component: () => import("@/views/form/BasicForm.vue")
           },
           {
-            path: '/form/stepForm',
+            path: '/form/stepForm/',
             name: 'stepForm',
             hideChildrenMenu: true,
             meta: { title: '分步表单' },
@@ -106,7 +112,7 @@ const routes = [
 
   },
   {
-    path: '*',
+    path: '*',  // 捕获没有得到匹配的路由
     name: '404',
     hideInMenu: true,
     component: () => import('@/views/404.vue')
@@ -123,27 +129,46 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+// 模拟登录状态
+const flag = true
+
+// 全局前置守卫
 router.beforeEach((to, from, next) => {
-  if (to.path !== from.path) {
-    NProgress.start()
+  // if (to.path !== from.path) {
+  //   NProgress.start()
+  // }
+  if (flag) {
+    // if (to.name === 'login') next('/form/basicForm')
+    // else next()
+    next()
+
+  } else {
+    if (to.name === 'login') next()
+    else next('/user/login')
   }
-  const record = findLast(to.matched, record => record.meta.authority)
-  if (record && !check(record.meta.authority)) {
-    if (!isLogin() && to.path !== '/user/login') {
-      next({
-        path: '/user/login'
-      })
-    } else if (to.path !== '/403') {
-      next({
-        path: '/403'
-      })
-    }
-    NProgress.done()
-  }
-  next()
+
+
+  // const record = findLast(to.matched, record => record.meta.authority)
+  // if (record && !check(record.meta.authority)) {
+  //   if (!isLogin() && to.path !== '/user/login') {
+  //     next({
+  //       path: '/user/login'
+  //     })
+  //   } else if (to.path !== '/403') {
+  //     next({
+  //       path: '/403'
+  //     })
+  //   }
+  //   NProgress.done()
+  // }
+  // next()
 })
+
+
+
 router.afterEach(() => {
-  NProgress.done()
+  // NProgress.done()
 })
 
 export default router

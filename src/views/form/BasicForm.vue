@@ -7,6 +7,9 @@
 
 <script>
 import SearchPlus from "../../components/searchPlus/SearchPlus.vue";
+import api from "@/utils/request.js";
+import Mock from "mockjs";
+
 const treeData = [
   {
     title: "Node1",
@@ -111,6 +114,30 @@ export default {
       ],
       searchParams: null,
     };
+  },
+  mounted() {
+    api
+      // .get({ url: "/user/userInfo" })
+      .get({
+        url: "/users",
+        param: {
+          id: 1,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // Mock.mock("http://localhost:8081/user/userInfo", {
+    //   id: "@id()", // 随机 id
+    //   name: "@cname()", // 随机姓名
+    //   date: "@date()",
+    //   ip: "@ip()",
+    //   email: "@email()",
+    // });
   },
   methods: {
     search(value) {
