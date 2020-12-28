@@ -7,7 +7,7 @@
 
 <script>
 import SearchPlus from "../../components/searchPlus/SearchPlus.vue";
-import api from "@/utils/request.js";
+import api from "@/api/http.js";
 import Mock from "mockjs";
 
 const treeData = [

@@ -8,8 +8,6 @@ import Antd from 'ant-design-vue';
 import Authorized from './components/Authorized.vue'
 import auth from './directives/auth.js';
 
-// import api from './utils/request.js'
-
 
 
 
