@@ -2,6 +2,7 @@
   <div>
     <search-plus :searchData="searchData" @search="search"></search-plus>
     <div>{{ searchParams }}</div>
+    <h1>利用 Mock 拦截 ajax 请求</h1>
   </div>
 </template>
 
@@ -117,13 +118,11 @@ export default {
   },
   mounted() {
     api
-      // .get({ url: "/user/userInfo" })
-      .get({
-        url: "/users",
-        param: {
-          id: 1,
-        },
-      })
+      // .get({ url: "/test" })
+      // .get({ url: "/api/lishijr" })
+      // .get({ url: "/express/server" })
+      // .get({ url: "todos/1" })
+      .get({ url: "/user/userInfo" })
       .then((res) => {
         console.log(res);
       })
@@ -131,13 +130,14 @@ export default {
         console.log(err);
       });
 
-    // Mock.mock("http://localhost:8081/user/userInfo", {
-    //   id: "@id()", // 随机 id
-    //   name: "@cname()", // 随机姓名
-    //   date: "@date()",
-    //   ip: "@ip()",
-    //   email: "@email()",
-    // });
+    Mock.mock("/user/userInfo", {
+    // Mock.mock("http://jsonplaceholder.typicode.com/todos/1", {
+      id: "@id()", // 随机 id
+      name: "@cname()", // 随机姓名
+      date: "@date()",
+      ip: "@ip()",
+      email: "@email()",
+    });
   },
   methods: {
     search(value) {

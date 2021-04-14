@@ -6,13 +6,13 @@ import qs from 'qs'
  */
 switch (process.env.NODE_ENV) {
   case 'production':
-    axios.defaults.baseURL = 'https://api.muxiaoguo.cn';
+    // axios.defaults.baseURL = 'https://api.muxiaoguo.cn';
     break
   case 'test':
-    axios.defaults.baseURL = 'http://localhost:8081/';
+    // axios.defaults.baseURL = 'http://localhost:8081/';
     break
   default:
-    axios.defaults.baseURL = 'http://localhost:8080/'
+    // axios.defaults.baseURL = 'https://api.muxiaoguo.cn'
 }
 /**
  * 设置超时时间和跨域是否携带凭证
@@ -29,7 +29,7 @@ axios.defaults.withCredentials = true
  * qs库,用于url参数转化
  */
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-axios.defaults.transformRequest = data => qs.stringify(data)
+// axios.defaults.transformRequest = data => qs.stringify(data)
 
 /**
  * 设置请求拦截器
@@ -92,44 +92,3 @@ export default axios
 
 
 
-// axios 实例化
-const request = axios.create({
-  // baseURL: 'http://localhost:8081/',
-  // baseURL: 'http://jsonplaceholder.typicode.com',
-  timeout: 6000,
-  headers: { 'X-Custom-Header': 'foobar' }
-})
-
-// request interceptors
-request.interceptors.request.use(function (config) {
-  // 在发送请求之前做些什么
-  return config;
-}, function (error) {
-  // 对请求错误做些什么
-  return Promise.reject(error);
-});
-
-// response interceptors
-request.interceptors.response.use(function (response) {
-  // 对响应数据做点什么
-  return response;
-}, function (error) {
-  // 对响应错误做点什么
-  return Promise.reject(error);
-})
-
-
-function get({ url, param, responseType }) {
-  return request({
-    url: url,
-    params: param,
-    responseType: responseType,
-    method: 'GET'
-  })
-}
-
-const api = {
-  get
-}
-
-export default api

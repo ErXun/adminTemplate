@@ -9,6 +9,13 @@ var json = fs.readFileSync(path.join(
 
 var obj = JSON5.parse(json)
 
-
-
 console.log(obj);
+/**
+ * { 'list|100':
+   [ { id: '@id()',
+       name: '@cname()',
+       date: '@date()',
+       ip: '@ip()',
+       email: '@email()' } ],
+  'newList|10': [ { id: '@id()', name: '@cname()' } ] }
+ */

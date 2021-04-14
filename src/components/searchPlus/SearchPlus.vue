@@ -103,6 +103,7 @@ export default {
     },
     toggle() {
       this.expand = !this.expand;
+      this.$emit("toggle", this.expand);
     },
   },
 };

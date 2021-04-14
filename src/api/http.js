@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // axios 实例化
 const request = axios.create({
-  baseURL: 'http://localhost:8080/',
+  // baseURL: 'http://localhost:8081/',
   // baseURL: 'http://jsonplaceholder.typicode.com',
   timeout: 6000,
   headers: { 'X-Custom-Header': 'foobar' }

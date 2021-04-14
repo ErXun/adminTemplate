@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 256px">
+  <div>
     <a-menu
       :default-selected-keys="['1']"
       :default-open-keys="['2']"
@@ -25,6 +25,7 @@
 <script>
 import SubMenu from "./SubMenu.vue";
 import { check } from "../../utils/auth";
+import { mapState } from "vuex";
 export default {
   components: {
     "sub-menu": SubMenu,
@@ -35,11 +36,20 @@ export default {
       default: "dark",
     },
   },
+  mounted() {
+    // console.log(this.$router.options.routes, "routes");
+    // console.log(this.menuData, "menuData");
+    console.log(this.menu_data, "menu_data");
+  },
+  computed: {
+    ...mapState({
+      menu_data: (state) => state.user.accessRoutes,
+    }),
+  },
   data() {
     const menuData = this.getMenuData(this.$router.options.routes);
     return {
       collapsed: false,
-      list: [],
       menuData,
     };
   },

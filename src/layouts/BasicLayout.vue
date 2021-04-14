@@ -7,12 +7,12 @@
         v-model="collapsed"
         :trigger="null"
         collapsible
-        width="256px"
+        class="sider-layout"
       >
         <h1 class="title">Ant Desgin Vue Plus</h1>
         <aside-plus :theme="navTheme" />
       </a-layout-sider>
-      <a-layout>
+      <a-layout class="wrapper">
         <a-layout-header class="header clearfix">
           <a-icon
             v-auth="['admin']"
@@ -25,7 +25,7 @@
         <a-layout-content>
           <content-plus class="content" />
         </a-layout-content>
-        <a-layout-footer style="text-align: center">
+        <a-layout-footer class="footer">
           <footer-plus />
         </a-layout-footer>
       </a-layout>
@@ -88,21 +88,49 @@ export default {
     color: #1890ff;
   }
   .header {
-    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 200px;
+    right: 0;
+    height: 64px;
+    // height:;
+    background: skyblue;
     padding: 0;
     .headerInfo {
       float: right;
     }
   }
-  .content {
-    background: #fff;
-    margin: 15px;
-    height: 100%;
+  .sider-layout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
   }
-  .drawer {
-    position: absolute;
-    right: 1%;
-    top: 30%;
+  .wrapper {
+    position: fixed;
+    top: 0;
+    left: 200px;
+    right: 0;
+    bottom: 0;
+    .content {
+      position: fixed;
+      top: 64px;
+      left: 200px;
+      bottom: 70px;
+      right: 0;
+      margin: 15px;
+      // outline: 1px solid red;
+    }
+    .footer {
+      height: 70px;
+      text-align: center;
+    }
+    .drawer {
+      position: absolute;
+      right: 1%;
+      top: 30%;
+    }
   }
 }
 .nav-theme-light .home .title {

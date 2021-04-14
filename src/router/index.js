@@ -4,6 +4,7 @@ import NProgress from 'nprogress'
 import findLast from 'lodash/findLast'
 import { check, isLogin } from '../utils/auth'
 import 'nprogress/nprogress.css'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -31,12 +32,13 @@ const routes = [
           {
             path: '/dashboard/analysis',
             name: 'analysis',
+            // meta: { title: '分析页', requiredLogin: true },
             meta: { title: '分析页' },
             component: () => import('@/views/dashboard/Analysis.vue'),
             //  路由独享守卫
             beforeEnter: (to, from, next) => {
-              console.log(to);
-              console.log(from);
+              // console.log(to);
+              // console.log(from);
               next()
             }
           },
@@ -45,6 +47,12 @@ const routes = [
             name: 'workplace',
             meta: { title: '工作区' },
             component: () => import('@/views/dashboard/Workplace.vue'),
+          },
+          {
+            path: '/dashboard/test',
+            name: 'test',
+            meta: { title: 'test' },
+            component: () => import('@/views/dashboard/Test.vue'),
           },
         ]
       },
@@ -89,6 +97,7 @@ const routes = [
       }
     ]
   },
+  // 登录与注册
   {
     path: '/user',
     hideInMenu: true,  // 不在菜单中显示
@@ -130,45 +139,50 @@ const router = new VueRouter({
   routes
 })
 
-// 模拟登录状态
-const flag = true
+// // 模拟登录状态
+// const flag = false
 
-// 全局前置守卫
-router.beforeEach((to, from, next) => {
-  // if (to.path !== from.path) {
-  //   NProgress.start()
-  // }
-  if (flag) {
-    // if (to.name === 'login') next('/form/basicForm')
-    // else next()
-    next()
+// // 全局前置守卫
+// router.beforeEach((to, from, next) => {
 
-  } else {
-    if (to.name === 'login') next()
-    else next('/user/login')
-  }
+//   // console.log(to, 'to');
+//   if (to.meta.requiredLogin && !store.state.user.isLogin) {
+//     next({ name: 'login' })
+//   } else {
+//     next()
+//   }
 
+//   if (to.path !== from.path) {
+//     NProgress.start()
+//   }
 
-  // const record = findLast(to.matched, record => record.meta.authority)
-  // if (record && !check(record.meta.authority)) {
-  //   if (!isLogin() && to.path !== '/user/login') {
-  //     next({
-  //       path: '/user/login'
-  //     })
-  //   } else if (to.path !== '/403') {
-  //     next({
-  //       path: '/403'
-  //     })
-  //   }
-  //   NProgress.done()
-  // }
-  // next()
-})
+//   /*
+//  if (flag) {
+//    if (to.name === 'login') next('/form/basicForm')
+//    else next()
+//    next()
+//  } else {
+//    if (to.name === 'login') next()
+//    else next('/user/login')
+//  }
+//  const record = findLast(to.matched, record => record.meta.authority)
+//  if (record && !check(record.meta.authority)) {
+//    if (!isLogin() && to.path !== '/user/login') {
+//      next({
+//        path: '/user/login'
+//      })
+//    } else if (to.path !== '/403') {
+//      next({
+//        path: '/403'
+//      })
+//    }
+//    NProgress.done()
+//  }*/
 
+// })
 
-
-router.afterEach(() => {
-  // NProgress.done()
-})
+// router.afterEach(() => {
+//   NProgress.done()
+// })
 
 export default router
